@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.API_URL,
+  baseUrl: "https://5fc9346b2af77700165ae514.mockapi.io",
 });
 
 const baseQueryWithInterceptor: BaseQueryFn<

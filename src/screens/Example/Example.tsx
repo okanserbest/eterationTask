@@ -37,7 +37,7 @@ const Example = () => {
       Alert.alert(t('example:helloUser', { name: data.name }));
     }
   }, [isSuccess, data]);
-  console.log(Size.SH)
+  
   const onChangeTheme = ({ theme, darkMode }: Partial<ThemeState>) => {
     dispatch(changeTheme({ theme, darkMode }));
   };
