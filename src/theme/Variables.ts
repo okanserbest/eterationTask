@@ -6,6 +6,7 @@
  */
 
 import { ThemeNavigationColors } from '../../@types/theme';
+import { Dimensions, PixelRatio } from 'react-native';
 
 /**
  * Colors
@@ -56,9 +57,22 @@ export const MetricsSizes = {
   large,
 };
 
+const FULL_SW = Dimensions.get('window').width;
+const FULL_SH = Dimensions.get('window').height;
+const SW = FULL_SW / 390;
+const SH = FULL_SH / 844;
+
+const Size = {
+  FULL_SW,
+  FULL_SH,
+  SW,
+  SH
+}
+
 export default {
   Colors,
   NavigationColors,
   FontSize,
   MetricsSizes,
+  Size,
 };

@@ -7,6 +7,7 @@ export type ThemeVariables = {
   NavigationColors: typeof Variables.NavigationColors;
   FontSize: typeof Variables.FontSize;
   MetricsSizes: typeof Variables.MetricsSizes;
+  Size: typeof Variables.Size
 };
 
 export type Theme<F, G, I, L, C> = ThemeVariables & {

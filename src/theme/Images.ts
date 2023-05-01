@@ -16,6 +16,11 @@ export default function ({}: ThemeVariables) {
       colors: require('./assets/images/colorswatch.png'),
       send: require('./assets/images/send.png'),
       translate: require('./assets/images/translate.png'),
+      basket: require('./assets/images/icons/basket.png'),
+      home: require('./assets/images/icons/home.png'),
+      profile: require('./assets/images/icons/profile.png'),
+      star: require('./assets/images/icons/star.png'),
     },
+
   };
 }
