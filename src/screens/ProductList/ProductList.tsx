@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '../../hooks';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setResponceProduct } from '../../store/products';
+import styles from './ProductList.style';
+import ProductItem from 'eterationTask/src/components/ProductItem/ProductItem';
+
+
 
 type Movie = {
   id: string;
@@ -29,8 +33,8 @@ const ProductList = () => {
   const [isLoading, setLoading] = useState(true);
 
 
-  const product = useSelector((state:any) => state.products);
-  console.log("product",product)
+  const products = useSelector((state: any) => state.products);
+
 
   const getMovies = async () => {
     try {
@@ -50,12 +54,70 @@ const ProductList = () => {
 
 
   // console.log("data",data)
-  console.log("isLoading",isLoading)
-  
+
+  const renderItem = ({ item, index }) => {
+    console.log("render Item")
+    return (
+      // <Text>{item.id}</Text>
+      <ProductItem
+        data={item}
+      />
+    )
+  }
+
+
+  console.log("products 0", products)
+  if (isLoading && products.length !== 0) {
+    return (
+      <View>
+        <ActivityIndicator size="large" color="#536DFE" />
+      </View>
+    )
+  }
+
+  const showData = products[products.showProduct]
+
   return (
-    <View style={[Layout.fill, Layout.colCenter]}>
-      <Text>ProductList</Text>
-    </View>
+    // <SafeAreaView style={{flex:1, backgroundColor: "white" }}>
+
+
+      <View>
+        <View style={[styles.header, Layout.fullWidth]}>
+          <Text style={[Fonts.titleSmall, styles.headerTitle, Layout.alignItemsStart]}>E-Market</Text>
+        </View>
+
+        <View style={[styles.searchSection]}>
+          <Image source={Images.icons.search} style={[styles.searchIcon]} />
+          <TextInput
+            style={[styles.input]}
+            placeholder="Search"
+            onChangeText={(searchString) => { console.log("searchString", searchString) }}
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View style={[styles.filterSection, Layout.row, Layout.alignItemsCenter, Layout.justifyContentBetween]}>
+          <Text style={[Fonts.textCenter, styles.filterText]}>Filters:</Text>
+          <TouchableOpacity style={[styles.filterButton]}>
+            <Text>Select Filter</Text>
+          </TouchableOpacity>
+        </View>
+
+        <FlatList
+          numColumns={2}
+          data={showData}
+          columnWrapperStyle={{
+            // justifyContent: 'space-around',
+            alignItems: 'center',
+          }}
+          keyExtractor={item => item.id}
+          renderItem={renderItem}
+
+        />
+
+      </View>
+
+    
+    // </SafeAreaView>
   );
 };
 

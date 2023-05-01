@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import themes from '../../theme/themes';
 import { Product } from 'eterationTask/@types/product';
 
 const slice = createSlice({
@@ -11,7 +10,7 @@ const slice = createSlice({
       state.responceProduct = payload;
 
 
-      console.log("responceProduct",state.responceProduct)
+      // console.log("responceProduct",state.responceProduct)
       // if (typeof payload !== 'undefined') {
       // }
     },

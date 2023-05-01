@@ -20,6 +20,8 @@ export default function ({}: ThemeVariables) {
       home: require('./assets/images/icons/home.png'),
       profile: require('./assets/images/icons/profile.png'),
       star: require('./assets/images/icons/star.png'),
+      search: require('./assets/images/icons/search.png'),
+      
     },
 
   };
