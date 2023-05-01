@@ -5,6 +5,7 @@ import styles from './AppStack.style';
 import theme from 'eterationTask/src/theme/Variables';
 const { SH, SW } = theme.Size;
 const Tab = createBottomTabNavigator();
+import { useSelector } from 'react-redux';
 import { useTheme } from '../../hooks';
 import ProductList from '../../screens/ProductList/ProductList'
 import Cart from 'eterationTask/src/screens/Cart/Cart';
@@ -21,6 +22,10 @@ const AppStack = () => {
     darkMode: isDark,
     Size
   } = useTheme()
+
+  const card = useSelector((state: any) => state.carts);
+  const totalCart = card.Carts.reduce((accumulator: any, currentValue: any) => {accumulator += currentValue.amount;return accumulator}, 0);
+  console.log("totalCart",totalCart)
   return (
     <Tab.Navigator
       screenOptions={{

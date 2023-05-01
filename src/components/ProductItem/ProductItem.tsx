@@ -4,6 +4,8 @@ import { useTheme } from '../../hooks';
 import styles from './ProductItem.style';
 import { Product } from 'eterationTask/@types/product';
 import FastImage from 'react-native-fast-image';
+import { useDispatch } from 'react-redux';
+import { addCart } from 'eterationTask/src/store/cart';
 
 
 type Props = {
@@ -11,9 +13,9 @@ type Props = {
 };
 
 const ProductItem = ({ data }: Props) => {
+  const dispatch = useDispatch();
   const { Layout, Images,FontSize ,Fonts} = useTheme();
   const { image, name, price, id, brand } = data;
-  console.log("image",image);
   return (
     <View style={styles.container} >
       
@@ -26,7 +28,10 @@ const ProductItem = ({ data }: Props) => {
       />
       <Text style={[Fonts.textSmall,styles.priceText]}>{price} </Text>
       <Text style={[styles.nameText]}>{brand} {name}</Text>
-      <TouchableOpacity style={[styles.button,Layout.alignItemsCenter,Layout.justifyContentCenter,Layout.center]}>
+      <TouchableOpacity
+       style={[styles.button,Layout.alignItemsCenter,Layout.justifyContentCenter,Layout.center]}
+        onPress={() => {dispatch(addCart(id))}}
+       >
         <Text style={[Fonts.textSmall,styles.buttonText]}>Add to Cart</Text>
       </TouchableOpacity>
     </View>

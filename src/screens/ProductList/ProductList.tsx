@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '../../hooks';
 import { useDispatch, useSelector } from 'react-redux';
-import { setResponceProduct } from '../../store/products';
+import { setResponceProduct, setSearchText } from '../../store/products';
 import styles from './ProductList.style';
 import ProductItem from 'eterationTask/src/components/ProductItem/ProductItem';
 
@@ -33,7 +33,8 @@ const ProductList = () => {
   const [isLoading, setLoading] = useState(true);
 
 
-  const products = useSelector((state: any) => state.products);
+  const showData = useSelector((state: any) => state.products).filteringProduct;
+  
 
 
   const getMovies = async () => {
@@ -56,18 +57,14 @@ const ProductList = () => {
   // console.log("data",data)
 
   const renderItem = ({ item, index }) => {
-    console.log("render Item")
     return (
-      // <Text>{item.id}</Text>
       <ProductItem
         data={item}
       />
     )
   }
 
-
-  console.log("products 0", products)
-  if (isLoading && products.length !== 0) {
+  if (isLoading) {
     return (
       <View>
         <ActivityIndicator size="large" color="#536DFE" />
@@ -75,7 +72,7 @@ const ProductList = () => {
     )
   }
 
-  const showData = products[products.showProduct]
+  // const showData = products.filteringProduct
 
   return (
     // <SafeAreaView style={{flex:1, backgroundColor: "white" }}>
@@ -91,7 +88,7 @@ const ProductList = () => {
           <TextInput
             style={[styles.input]}
             placeholder="Search"
-            onChangeText={(searchString) => { console.log("searchString", searchString) }}
+            onChangeText={(searchString) => {dispatch(setSearchText(searchString)) }}
             underlineColorAndroid="transparent"
           />
         </View>

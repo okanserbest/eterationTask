@@ -50,6 +50,7 @@ export default StyleSheet.create<globalStyleType>({
 
   filterSection: {
     marginTop: SH * 14,
+    marginBottom: SH * 14,
     marginHorizontal: 16*SW,
     height:36*SH,
     
