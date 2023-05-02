@@ -6,6 +6,7 @@ import { Product } from 'eterationTask/@types/product';
 import FastImage from 'react-native-fast-image';
 import { useDispatch } from 'react-redux';
 import { addCart } from 'eterationTask/src/store/cart';
+import { useNavigation } from '@react-navigation/native';
 
 
 type Props = {
@@ -14,27 +15,26 @@ type Props = {
 
 const ProductItem = ({ data }: Props) => {
   const dispatch = useDispatch();
-  const { Layout, Images,FontSize ,Fonts} = useTheme();
+  const navigation = useNavigation();
+  const { Layout, Images, FontSize, Fonts } = useTheme();
   const { image, name, price, id, brand } = data;
   return (
-    <View style={styles.container} >
-      
-
+    <TouchableOpacity onPress={() => navigation.navigate('ProductDetail', { id })} style={styles.container} >
       <Image
-        style={[styles.image, Layout.alignItemsCenter,Layout.justifyContentCenter,Layout.center]}
+        style={[styles.image, Layout.alignItemsCenter, Layout.justifyContentCenter, Layout.center]}
         source={{
           uri: `${image}.png`,
         }}
       />
-      <Text style={[Fonts.textSmall,styles.priceText]}>{price} </Text>
+      <Text style={[Fonts.textSmall, styles.priceText]}>{price} </Text>
       <Text style={[styles.nameText]}>{brand} {name}</Text>
       <TouchableOpacity
-       style={[styles.button,Layout.alignItemsCenter,Layout.justifyContentCenter,Layout.center]}
-        onPress={() => {dispatch(addCart(id))}}
-       >
-        <Text style={[Fonts.textSmall,styles.buttonText]}>Add to Cart</Text>
+        style={[styles.button, Layout.alignItemsCenter, Layout.justifyContentCenter, Layout.center]}
+        onPress={() => { dispatch(addCart(id)) }}
+      >
+        <Text style={[Fonts.textSmall, styles.buttonText]}>Add to Cart</Text>
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 

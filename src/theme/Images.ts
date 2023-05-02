@@ -21,7 +21,9 @@ export default function ({}: ThemeVariables) {
       profile: require('./assets/images/icons/profile.png'),
       star: require('./assets/images/icons/star.png'),
       search: require('./assets/images/icons/search.png'),
-      
+      starAdded: require('./assets/images/icons/starAdded.png'),
+      starNotAdd: require('./assets/images/icons/starNotAdd.png'),
+      back: require('./assets/images/icons/back.png'),
     },
 
   };

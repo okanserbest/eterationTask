@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, View, Text,Image } from 'react-native';
+import { Platform, View, Text, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import styles from './AppStack.style';
 import theme from 'eterationTask/src/theme/Variables';
@@ -7,10 +7,11 @@ const { SH, SW } = theme.Size;
 const Tab = createBottomTabNavigator();
 import { useSelector } from 'react-redux';
 import { useTheme } from '../../hooks';
-import ProductList from '../../screens/ProductList/ProductList'
+import ProductList from '../../screens/ProductList/ProductList';
 import Cart from 'eterationTask/src/screens/Cart/Cart';
 import Star from 'eterationTask/src/screens/Star/Star';
 import Profile from 'eterationTask/src/screens/Profile/Profile';
+import Details from 'eterationTask/src/screens/Details/Details';
 
 const AppStack = () => {
   const {
@@ -20,12 +21,16 @@ const AppStack = () => {
     Layout,
     Images,
     darkMode: isDark,
-    Size
-  } = useTheme()
+    Size,
+  } = useTheme();
 
   const card = useSelector((state: any) => state.carts);
-  const totalCart = card.Carts.reduce((accumulator: any, currentValue: any) => {accumulator += currentValue.amount;return accumulator}, 0);
-  console.log("totalCart",totalCart)
+  const totalCart = card.Carts.reduce((accumulator: any, currentValue: any) => {
+    accumulator += currentValue.amount;
+    return accumulator;
+  }, 0);
+  const totalStar = card.Stars.length;
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -40,9 +45,12 @@ const AppStack = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabBarIconContainer}>
-            <Image source={Images.icons.home} style={styles.tabBarIconImage} />
+              <Image
+                source={Images.icons.home}
+                style={styles.tabBarIconImage}
+              />
             </View>
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -51,9 +59,15 @@ const AppStack = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabBarIconContainer}>
-            <Image source={Images.icons.basket} style={styles.tabBarIconImage} />
+              {totalCart > 0 && (
+                <Text style={styles.iconBadge}>{totalCart}</Text>
+              )}
+              <Image
+                source={Images.icons.basket}
+                style={styles.tabBarIconImage}
+              />
             </View>
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -62,20 +76,29 @@ const AppStack = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabBarIconContainer}>
-            <Image source={Images.icons.star} style={styles.tabBarIconImage} />
+              {totalStar > 0 && (
+                <Text style={styles.iconBadge}>{totalStar}</Text>
+              )}
+              <Image
+                source={Images.icons.star}
+                style={styles.tabBarIconImage}
+              />
             </View>
-          )
+          ),
         }}
       />
-            <Tab.Screen
+      <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabBarIconContainer}>
-            <Image source={Images.icons.profile} style={styles.tabBarIconImage} />
+              <Image
+                source={Images.icons.profile}
+                style={styles.tabBarIconImage}
+              />
             </View>
-          )
+          ),
         }}
       />
     </Tab.Navigator>

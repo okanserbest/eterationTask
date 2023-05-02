@@ -37,7 +37,7 @@ const ProductList = () => {
   
 
 
-  const getMovies = async () => {
+  const getProducts  = async () => {
     try {
       const response = await fetch('https://5fc9346b2af77700165ae514.mockapi.io/products/');
       const json = await response.json();
@@ -50,19 +50,23 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    getMovies();
+    getProducts();
   }, []);
 
 
   // console.log("data",data)
 
-  const renderItem = ({ item, index }) => {
-    return (
-      <ProductItem
+  const renderItem = useCallback(
+    ({ item, index }) => {
+      return (
+        <ProductItem
         data={item}
       />
-    )
-  }
+      )
+    },
+    [showData],
+  );
+
 
   if (isLoading) {
     return (
