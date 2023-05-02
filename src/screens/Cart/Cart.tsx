@@ -3,7 +3,7 @@ import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '../../hooks';
 import styles from './Cart.style';
 import { useDispatch, useSelector } from 'react-redux';
-import { decreaseAmount, increaseAmount } from 'eterationTask/src/store/cart';
+import { complateCart, decreaseAmount, increaseAmount } from 'eterationTask/src/store/cart';
 
 
 const CardContainer = ({ product, amount }: any) => {
@@ -43,7 +43,7 @@ const Cart = () => {
     Gutters,
     Layout,
   } = useTheme();
-
+  const dispatch = useDispatch();
   // const allProducts = useSelector((state: any) => state.products).responceProduct
   const allProducts = useSelector((state: any) => state.products).responceProduct
   const card = useSelector((state: any) => state.carts).Carts.map((item: any) => {
@@ -79,7 +79,7 @@ const Cart = () => {
           <Text style={[Fonts.textRegular, Fonts.textBold, styles.priceTextBlack]} >{`${totalPrice}₺`}</Text>
         </View>
 
-        <TouchableOpacity style={[styles.addToCartButton]} onPress={() => { console.log({ totalPrice }) }}>
+        <TouchableOpacity style={[styles.addToCartButton]} onPress={() => { dispatch(complateCart())}}>
           <Text style={[styles.addToCartButtonText]} >{"Complate"}</Text>
         </TouchableOpacity>
       </View>

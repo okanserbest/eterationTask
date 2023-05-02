@@ -37,6 +37,9 @@ const slice = createSlice({
         state.Carts[index].amount -= 1;
       }
     },
+    complateCart: (state ) => {
+      state.Carts= []
+    },
 
     // Stars
     addStar: (state, { payload }: ProductIdPayload) => {
@@ -59,7 +62,7 @@ const slice = createSlice({
 
 
 
-export const { addCart, increaseAmount, decreaseAmount } = slice.actions;
+export const { addCart, increaseAmount, decreaseAmount,complateCart } = slice.actions;
 
 export default slice.reducer;
 
