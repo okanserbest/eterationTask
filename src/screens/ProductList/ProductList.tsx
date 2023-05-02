@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '../../hooks';
 import { useDispatch, useSelector } from 'react-redux';
-import { setResponceProduct, setSearchText } from '../../store/products';
+import { openModel, setResponceProduct, setSearchText } from '../../store/products';
 import styles from './ProductList.style';
 import ProductItem from 'eterationTask/src/components/ProductItem/ProductItem';
+import FilterModel from 'eterationTask/src/components/FilterModel/FilterModel';
 
 
 
@@ -79,6 +80,7 @@ const ProductList = () => {
 
   return (
     <View>
+      <FilterModel />
       <View style={[styles.header, Layout.fullWidth]}>
         <Text style={[Fonts.titleSmall, styles.headerTitle, Layout.alignItemsStart]}>E-Market</Text>
       </View>
@@ -94,7 +96,7 @@ const ProductList = () => {
       </View>
       <View style={[styles.filterSection, Layout.row, Layout.alignItemsCenter, Layout.justifyContentBetween]}>
         <Text style={[Fonts.textCenter, styles.filterText]}>Filters:</Text>
-        <TouchableOpacity style={[styles.filterButton]}>
+        <TouchableOpacity style={[styles.filterButton]} onPress={()=> dispatch(openModel(true))}>
           <Text>Select Filter</Text>
         </TouchableOpacity>
       </View>

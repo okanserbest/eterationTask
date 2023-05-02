@@ -53,7 +53,9 @@ const Cart = () => {
 
 
   const totalPrice = card.reduce((acc: any, item: any) => {
-    return acc + item.amount * item.product.price;
+    const amaount =  item?.amount ? item?.amount : 1
+    const price = item?.product?.price ? item?.product?.price : 1
+    return acc + amaount *  price;
   }, 0)
 
   if (card.length == 0) {
