@@ -23,6 +23,9 @@ const Details = ({ route }) => {
  
   const { image, name, brand, description, price } = showData
 
+  if(!price || !image || !brand || !description || !name){
+    return null
+  }
 
   const navigation = useNavigation()
   return (

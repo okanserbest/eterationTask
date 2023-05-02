@@ -30,7 +30,7 @@ const slice = createSlice({
       if (index === -1) {
         return
       }
-      if(state.Carts[index].amount ===0){
+      if(state.Carts[index].amount ===1){
         const  newCarts = state.Carts.filter(e => e.productId !== payload);
         state.Carts= newCarts
       }else{

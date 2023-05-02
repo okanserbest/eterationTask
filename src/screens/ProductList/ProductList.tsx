@@ -34,10 +34,10 @@ const ProductList = () => {
 
 
   const showData = useSelector((state: any) => state.products).filteringProduct;
-  
 
 
-  const getProducts  = async () => {
+
+  const getProducts = async () => {
     try {
       const response = await fetch('https://5fc9346b2af77700165ae514.mockapi.io/products/');
       const json = await response.json();
@@ -60,8 +60,8 @@ const ProductList = () => {
     ({ item, index }) => {
       return (
         <ProductItem
-        data={item}
-      />
+          data={item}
+        />
       )
     },
     [showData],
@@ -76,48 +76,44 @@ const ProductList = () => {
     )
   }
 
-  // const showData = products.filteringProduct
 
   return (
-    // <SafeAreaView style={{flex:1, backgroundColor: "white" }}>
-
-
-      <View>
-        <View style={[styles.header, Layout.fullWidth]}>
-          <Text style={[Fonts.titleSmall, styles.headerTitle, Layout.alignItemsStart]}>E-Market</Text>
-        </View>
-
-        <View style={[styles.searchSection]}>
-          <Image source={Images.icons.search} style={[styles.searchIcon]} />
-          <TextInput
-            style={[styles.input]}
-            placeholder="Search"
-            onChangeText={(searchString) => {dispatch(setSearchText(searchString)) }}
-            underlineColorAndroid="transparent"
-          />
-        </View>
-        <View style={[styles.filterSection, Layout.row, Layout.alignItemsCenter, Layout.justifyContentBetween]}>
-          <Text style={[Fonts.textCenter, styles.filterText]}>Filters:</Text>
-          <TouchableOpacity style={[styles.filterButton]}>
-            <Text>Select Filter</Text>
-          </TouchableOpacity>
-        </View>
-
-        <FlatList
-          numColumns={2}
-          data={showData}
-          columnWrapperStyle={{
-            // justifyContent: 'space-around',
-            alignItems: 'center',
-          }}
-          keyExtractor={item => item.id}
-          renderItem={renderItem}
-
-        />
-
+    <View>
+      <View style={[styles.header, Layout.fullWidth]}>
+        <Text style={[Fonts.titleSmall, styles.headerTitle, Layout.alignItemsStart]}>E-Market</Text>
       </View>
 
-    
+      <View style={[styles.searchSection]}>
+        <Image source={Images.icons.search} style={[styles.searchIcon]} />
+        <TextInput
+          style={[styles.input]}
+          placeholder="Search"
+          onChangeText={(searchString) => { dispatch(setSearchText(searchString)) }}
+          underlineColorAndroid="transparent"
+        />
+      </View>
+      <View style={[styles.filterSection, Layout.row, Layout.alignItemsCenter, Layout.justifyContentBetween]}>
+        <Text style={[Fonts.textCenter, styles.filterText]}>Filters:</Text>
+        <TouchableOpacity style={[styles.filterButton]}>
+          <Text>Select Filter</Text>
+        </TouchableOpacity>
+      </View>
+
+      <FlatList
+        numColumns={2}
+        data={showData}
+        columnWrapperStyle={{
+          // justifyContent: 'space-around',
+          alignItems: 'center',
+        }}
+        keyExtractor={item => item.id}
+        renderItem={renderItem}
+
+      />
+
+    </View>
+
+
     // </SafeAreaView>
   );
 };
